@@ -465,14 +465,17 @@ PlotSubHeatMap <- function(mSetObj=NA, imgName, format="png", dpi=72, width=NA, 
       
       # re-order for pretty view
       cor.res <- mSetObj$analSet$cor.res;
-      
+
       ord.inx<-order(cor.res[,3]);
       cor.res <- cor.res[ord.inx, ];
       
+      ## filter the table before the coorelation value sorting
+      cor.res <- cor.res[1:top.num,]
+
       ord.inx<-order(cor.res[,1]);
       cor.res <- cor.res[ord.inx, ];
-      
-      var.nms <- rownames(cor.res)[1:top.num];
+
+      var.nms <- rownames(cor.res);
     }else if(method.nm == 'vip'){
       if(is.null(mSetObj$analSet$plsda)){
         PLSR.Anal(mSetObj);
